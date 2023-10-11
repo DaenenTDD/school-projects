@@ -22,6 +22,8 @@ void draw() {
     //println(mouseX + " | " + mouseY);
 }
 
+// keyPressed event to set the current number to a string containing all numbers pressed
+// Also making sure only numbers are accepted and set the number to zero when backspace is pressed
 void keyPressed() {
     if (key >= 48 && key <= 57) {
         storedNumber += key;
@@ -73,7 +75,8 @@ class Room {
                 line(_xPos, _yPos + 8, _xPos + 102, _yPos + 8);
                 line(_xPos, _yPos + 38, _xPos + 102, _yPos + 38);
 
-                // Ugly but working nested if statements to check if the mouse is inside each box
+                // Ugly but working nested if statements to check if the mouse is inside each box when clicked
+                // Check if the line is changed and set the number to 0 so the number does not continue from the last box
                 if (mouseX >= 51 && mouseX <= 151) {
                     if (mouseY >= 129 && mouseY <= 157 && mousePressed) {
                         if (_activeLine == 0) return;
@@ -97,6 +100,7 @@ class Room {
             }
         }
 
+        // Method for setting the value of the variable assigned to each box
         void setValue(String value) {
            switch (_activeLine) {
             case -1:
