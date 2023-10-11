@@ -19,7 +19,6 @@ void draw() {
     fill(0);
     myRoom.renderResult();
     myRoom2.renderResult();
-    //println(mouseX + " | " + mouseY);
 }
 
 // keyPressed event to set the current number to a string containing all numbers pressed
