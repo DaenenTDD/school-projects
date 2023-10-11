@@ -7,7 +7,7 @@ Room myRoom2 = new Room(50, 150, 20, true);
 // Setup size and unlimited framerate
 void setup() {
     frameRate(-1);
-    size(500, 500);
+    size(500, 650);
 }
 
 // Set colors and render values and results
@@ -19,6 +19,14 @@ void draw() {
     fill(0);
     myRoom.renderResult();
     myRoom2.renderResult();
+
+    // Create a table
+    fill(0, 0, 0, 0);
+    rect(100, 300, 270, 200);
+    line(235, 300, 235, 500);
+    line(100, 350, 370, 350);
+    line(100, 400, 370, 400);
+    line(100, 450, 370, 450);
 }
 
 // keyPressed event to set the current number to a string containing all numbers pressed
