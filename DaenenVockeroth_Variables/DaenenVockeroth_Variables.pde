@@ -60,11 +60,11 @@ class Room {
         void renderValues() {
             textSize(_fontSize);
             if (_activeLine == 0) { fill(0, 200, 40); } else { fill(0); }
-            text(str(_length), _xPos, _yPos);
+            text(str(_length), _xPos + 3, _yPos);
             if (_activeLine == 1) { fill(0, 200, 40); } else { fill(0); }
-            text(str(_width), _xPos, _yPos + 30);
+            text(str(_width), _xPos + 3, _yPos + 30);
             if (_activeLine == 2) { fill(0, 200, 40); } else { fill(0); }
-            text(str(_height), _xPos, _yPos + 60);
+            text(str(_height), _xPos + 3, _yPos + 60);
 
             // Add boxes around usermode values to differentiate and show that input is allowed.
             if (_userMode) {
@@ -76,10 +76,16 @@ class Room {
                 // Ugly but working nested if statements to check if the mouse is inside each box
                 if (mouseX >= 51 && mouseX <= 151) {
                     if (mouseY >= 129 && mouseY <= 157 && mousePressed) {
+                        if (_activeLine == 0) return;
+                        storedNumber = "0";
                         _activeLine = 0;
                     } else if (mouseY > 158 && mouseY < 185 && mousePressed) {
+                        if (_activeLine == 1) return;
+                        storedNumber = "0";
                         _activeLine = 1;
                     } else if (mouseY > 186 && mouseY < 220 && mousePressed) {
+                        if (_activeLine == 2) return;
+                        storedNumber = "0";
                         _activeLine = 2;
                     } else if (mousePressed) {
                         _activeLine = -1;
