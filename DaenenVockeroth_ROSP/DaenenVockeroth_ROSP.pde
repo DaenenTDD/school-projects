@@ -5,6 +5,8 @@ void setup() {
 
 
 
-class Tree() {
-    
+class Tree {
+    Tree(int posX, int posY) {
+
+    }
 }
