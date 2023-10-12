@@ -1,4 +1,14 @@
+/**
+    DaenenVockeroth_Variables v1.0.0
+
+    The DaenenVockeroth_Variables project contains a showcase of how variables can be used to store data. 
+    The project consists of a randomly generated or user inputted volume calculator, and a time table.
+*/
+
 String storedNumber = "";
+
+// Timetable Vars
+String teacher1 = "Mr. D", teacher2 = "Mr. Bjel", teacher3 = "NULL", teacher4 = "NULL", course1 = "Computer Science", course2 = "English LA 20-2", course3 = "NULL", course4 = "NULL";
 
 // Instantiate the room objects
 Room myRoom = new Room(50, 50, 20, false);
@@ -7,7 +17,7 @@ Room myRoom2 = new Room(50, 150, 20, true);
 // Setup size and unlimited framerate
 void setup() {
     frameRate(-1);
-    size(500, 650);
+    size(600, 800);
 }
 
 // Set colors and render values and results
@@ -27,10 +37,29 @@ void draw() {
     line(100, 350, 370, 350);
     line(100, 400, 370, 400);
     line(100, 450, 370, 450);
+
+    // Fill the table with data
+    fill(0);
+    textSize(16);
+    text("Block 1", 130, 326);
+    text(teacher1, 280, 322);
+    text(course1, 240, 340);
+    text("Block 2", 130, 376);
+    text(teacher2, 270, 372);
+    text(course2, 250, 390);
+    text("Block 3", 130, 426);
+    text(teacher3, 280, 422);
+    text(course3, 280, 440);
+    text("Block 4", 130, 476);
+    text(teacher4, 280, 472);
+    text(course4, 280, 490);
 }
 
-// keyPressed event to set the current number to a string containing all numbers pressed
-// Also making sure only numbers are accepted and set the number to zero when backspace is pressed
+/*
+   keyPressed event to set the current number to a string containing all numbers pressed
+   Also making sure only numbers are accepted and set the number to zero when backspace is pressed
+   Does not account for decimal places, ran out of time
+*/
 void keyPressed() {
     if (key >= 48 && key <= 57) {
         storedNumber += key;
