@@ -8,7 +8,7 @@
 String storedNumber = "";
 
 // Timetable Vars
-String teacher1 = "Mr. D", teacher2 = "Mr. Bjel", teacher3 = "NULL", teacher4 = "NULL", course1 = "Computer Science", course2 = "English LA 20-2", course3 = "NULL", course4 = "NULL";
+String teacher1 = "Mr. D", teacher2 = "Mr. Bjel", teacher3 = "NULL", teacher4 = "NULL", course1 = "Computer Science", course2 = "English LA 30-2", course3 = "NULL", course4 = "NULL";
 
 // Instantiate the room objects
 Room myRoom = new Room(50, 50, 20, false);
