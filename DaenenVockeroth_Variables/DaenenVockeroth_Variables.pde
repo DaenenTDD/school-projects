@@ -57,11 +57,10 @@ void draw() {
 
 /*
    keyPressed event to set the current number to a string containing all numbers pressed
-   Also making sure only numbers are accepted and set the number to zero when backspace is pressed
-   Does not account for decimal places, ran out of time
+   Also making sure only numbers/decimal point are accepted and set the number to zero when backspace is pressed
 */
 void keyPressed() {
-    if (key >= 48 && key <= 57) {
+    if (key >= 48 && key <= 57 || key == '.') {
         storedNumber += key;
         myRoom2.setValue(storedNumber);
     } else if (key == BACKSPACE) {
