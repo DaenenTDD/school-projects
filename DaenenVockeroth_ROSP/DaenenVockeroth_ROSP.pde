@@ -11,6 +11,28 @@ void draw() {
     shapes.drawBird(birdX, birdY);
 }
 
+void keyPressed() {
+    int keyASCII = int(key);
+    if (keyASCII < 97) {
+        keyASCII += 32;
+    }
+    
+    switch (keyASCII) {
+        case 119:
+            println("w");
+        break;
+        case 97:
+            println("a");
+        break;
+        case 115:
+            println("s");
+        break;
+        case 100:
+            println("d");
+        break;
+    }
+}
+
 class Shapes {
     public void drawTree(float _posX, float _posY) {
         fill(83, 53, 10);
@@ -28,3 +50,5 @@ class Shapes {
         ellipse(_posX + 7, _posY - 6, 10, 10);
     }
 }
+
+
