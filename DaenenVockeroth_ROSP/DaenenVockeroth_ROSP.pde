@@ -1,12 +1,13 @@
 float birdX = random(740), birdY = random(580);
 Bird bird = new Bird(birdX, birdY, 5);
+int r = 87, g = 144, b = 173;
 
 void setup() {
     size(800, 600);
 }
 
 void draw() {
-    background(87, 144, 173);
+    background(r, g, b);
     drawTree(200, 250);
     bird.drawBird();
 }
@@ -30,11 +31,32 @@ void keyPressed() {
         case 100:
             bird.movingRight = true;
         break;
+        default:
+            println(bird.getPos());
+        break;	
     }
 }
 
 void keyReleased() {
+    int keyASCII = int(key);
+    if (keyASCII < 97) {
+        keyASCII += 32;
+    }
     
+    switch (keyASCII) {
+        case 119:
+            bird.movingUp = false;
+        break;
+        case 97:
+            bird.movingLeft = false;
+        break;
+        case 115:
+            bird.movingDown = false;
+        break;
+        case 100:
+            bird.movingRight = false;
+        break;
+    }
 }
 
 public void drawTree(float _posX, float _posY) {
@@ -73,6 +95,10 @@ class Bird {
         triangle(_posX + 23, _posY - 10, _posX + 33, _posY, _posX + 23, _posY + 10);
         fill(0);
         ellipse(_posX + 7, _posY - 6, 10, 10);
+    }
+
+    public String getPos() {
+        return "Current position: X: " + _posX + " Y:" + _posY;
     }
 
     public void setPos(float posX, float posY) {
