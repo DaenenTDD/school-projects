@@ -1,5 +1,5 @@
 float birdX = random(740), birdY = random(580);
-Bird bird = new Bird(birdX, birdY, 5);
+Bird bird = new Bird(birdX, birdY, 9);
 int r = 87, g = 144, b = 173;
 
 void setup() {

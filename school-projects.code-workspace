@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "DaenenVockeroth_ROSP"
+		},
+		{
+			"path": ".git"
 		}
 	],
 	"settings": {}
