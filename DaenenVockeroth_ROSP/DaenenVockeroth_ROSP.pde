@@ -1,15 +1,29 @@
 float birdX = random(740), birdY = random(580);
 Bird bird = new Bird(birdX, birdY, 9);
 int r = 87, g = 144, b = 173;
+boolean isColliding = false, isVisible = true;
 
 void setup() {
     size(800, 600);
 }
 
 void draw() {
+    noCursor();
     background(r, g, b);
     drawTree(200, 250);
     bird.drawBird();
+    if (isVisible) {
+        float[] dogPos = drawDog(mouseX, mouseY);
+        float d = dist(bird.getPos()[0], bird.getPos()[1], dogPos[0], dogPos[1]);
+        if (d < 35 && !isColliding) {
+            isColliding = true;
+            r = round(random(255));
+            g = round(random(255));
+            b = round(random(255));
+        } else if (d > 35) {
+            isColliding = false;
+        }
+    }
 }
 
 void keyPressed() {
@@ -59,11 +73,24 @@ void keyReleased() {
     }
 }
 
+void mousePressed() {
+    r = round(random(255));
+    g = round(random(255));
+    b = round(random(255));
+
+    if (isVisible) { isVisible = false; } else { isVisible = true; }
+}
+
 public void drawTree(float _posX, float _posY) {
     fill(83, 53, 10);
     rect(_posX, _posY, 80, 300);
     fill(58, 95, 11);
     ellipse(_posX + 40, _posY, 180, 180);
+}
+
+public float[] drawDog(float _posX, float _posY) {
+    triangle(_posX, _posY - 10, _posX - 10, _posY + 10, _posX + 10, _posY + 10);
+    return new float[] { _posX, _posY };
 }
 
 class Bird {
@@ -97,8 +124,8 @@ class Bird {
         ellipse(_posX + 7, _posY - 6, 10, 10);
     }
 
-    public String getPos() {
-        return "Current position: X: " + _posX + " Y:" + _posY;
+    public float[] getPos() {
+        return new float[] { _posX, _posY };
     }
 
     public void setPos(float posX, float posY) {
@@ -106,4 +133,3 @@ class Bird {
         _posY = posY;
     }
 }
-
