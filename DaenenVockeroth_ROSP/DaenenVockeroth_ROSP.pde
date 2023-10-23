@@ -10,7 +10,7 @@ void setup() {
 void draw() {
     noCursor();
     background(r, g, b);
-    drawTree(200, 250);
+    drawTree(350, 300);
     bird.drawBird();
     if (isVisible) {
         float[] dogPos = drawDog(mouseX, mouseY);
