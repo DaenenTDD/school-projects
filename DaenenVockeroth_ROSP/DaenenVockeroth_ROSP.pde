@@ -12,9 +12,13 @@ void draw() {
     background(r, g, b);
     drawTree(350, 300);
     bird.drawBird();
+    // Check if the dog should be drawn
     if (isVisible) {
+        // Draw dog and save it's position in dogPos 
         float[] dogPos = drawDog(mouseX, mouseY);
+        // Get distance between dog and bird
         float d = dist(bird.getPos()[0], bird.getPos()[1], dogPos[0], dogPos[1]);
+        // Check for collision, and set background to random values
         if (d < 35 && !isColliding) {
             isColliding = true;
             r = round(random(255));
@@ -27,11 +31,13 @@ void draw() {
 }
 
 void keyPressed() {
+    // Check if key is uppercase and convert to lowercase
     int keyASCII = int(key);
     if (keyASCII < 97) {
         keyASCII += 32;
     }
     
+    // Check what key is being pressed and move bird accordingly
     switch (keyASCII) {
         case 119:
             bird.movingUp = true;
@@ -49,11 +55,13 @@ void keyPressed() {
 }
 
 void keyReleased() {
+    // Convert uppercase to lowercase
     int keyASCII = int(key);
     if (keyASCII < 97) {
         keyASCII += 32;
     }
     
+    // Check what key is released and stop moving accordingly
     switch (keyASCII) {
         case 119:
             bird.movingUp = false;
@@ -75,9 +83,11 @@ void mousePressed() {
     g = round(random(255));
     b = round(random(255));
 
-    if (isVisible) { isVisible = false; } else { isVisible = true; }
+    // Invert the dogs visibility status 
+    isVisible = isVisible ? false : true;
 }
 
+// Method for drawing the tree
 public void drawTree(float _posX, float _posY) {
     fill(83, 53, 10);
     rect(_posX, _posY, 80, 300);
@@ -85,11 +95,13 @@ public void drawTree(float _posX, float _posY) {
     ellipse(_posX + 40, _posY, 180, 180);
 }
 
+// Method for drawing the dog, returns the dogs position
 public float[] drawDog(float _posX, float _posY) {
     triangle(_posX, _posY - 10, _posX - 10, _posY + 10, _posX + 10, _posY + 10);
     return new float[] { _posX, _posY };
 }
 
+// Class for the bird
 class Bird {
     public float _posX, _posY, _moveSpeed;
     public boolean movingUp = false, movingLeft = false, movingDown = false, movingRight = false;
@@ -99,6 +111,7 @@ class Bird {
         _moveSpeed = moveSpeed;
     }
 
+    // Draw's the bird on the screen
     public void drawBird() {
         if (movingUp) {
             setPos(_posX, _posY -= _moveSpeed);
@@ -121,10 +134,12 @@ class Bird {
         ellipse(_posX + 7, _posY - 6, 10, 10);
     }
 
+    // Returns the position of the bird in an array
     public float[] getPos() {
         return new float[] { _posX, _posY };
     }
 
+    // Used to set the position of the bird
     public void setPos(float posX, float posY) {
         _posX = posX;
         _posY = posY;
