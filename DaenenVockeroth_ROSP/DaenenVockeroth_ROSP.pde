@@ -45,9 +45,6 @@ void keyPressed() {
         case 100:
             bird.movingRight = true;
         break;
-        default:
-            println(bird.getPos());
-        break;	
     }
 }
 
