@@ -1,10 +1,10 @@
 {
 	"folders": [
 		{
-			"path": "DaenenVockeroth_ROSP"
+			"path": ".git"
 		},
 		{
-			"path": ".git"
+			"path": "DaenenVockeroth_NestedForLoops"
 		}
 	],
 	"settings": {}
