@@ -89,6 +89,7 @@ class Button {
     }
 
     public void drawButton() {
+        stroke(0);
         fill(180);
         rect(_posX, _posY, _width, _height);
         fill(0);
