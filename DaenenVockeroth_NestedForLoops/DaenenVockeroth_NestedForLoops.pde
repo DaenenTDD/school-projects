@@ -73,9 +73,9 @@ void lines() {
 }
 
 class Button {
-    float _posX, _posY, _width, _height;
-    String _buttonText = "Button";
-    boolean isOnScreen;
+    private float _posX, _posY, _width, _height;
+    private String _buttonText = "Button";
+    boolean _onScreen;
 
     Button(float posX, float posY, float width, float height) {
         _posX = posX;
@@ -95,10 +95,15 @@ class Button {
         textSize(15);
         textAlign(CENTER, CENTER);
         text(_buttonText, _posX + _width / 2, _posY + _height / 2);
-        isOnScreen = true;
+        _onScreen = true;
     }
 
     boolean isMouseOver() {
+        if (_onScreen == true) {
+            _onScreen = false;
             return mouseX >= _posX && mouseX <= _posX + _width && mouseY >= _posY && mouseY <= _posY + height;
+        } else {
+            return false;
+        }
     }
 }
