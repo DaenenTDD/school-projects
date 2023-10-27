@@ -35,13 +35,13 @@ void draw() {
 }
 
 void mousePressed() {
-    if (showcaseOne.isMouseOver()) {
+    if (showcaseOne.mouseOver()) {
         currentShowcase = 0;
     }
-    if (showcaseTwo.isMouseOver()) {
+    if (showcaseTwo.mouseOver()) {
         currentShowcase = 1;
     }
-    if (backButton.isMouseOver()) {
+    if (backButton.mouseOver()) {
         currentShowcase = -1;
     }
 }
@@ -90,7 +90,10 @@ class Button {
 
     public void drawButton() {
         stroke(0);
-        fill(180);
+        fill(170);
+        if (mouseOver()) {
+            fill(210);
+        }
         rect(_posX, _posY, _width, _height);
         fill(0);
         textSize(15);
@@ -99,10 +102,10 @@ class Button {
         _onScreen = true;
     }
 
-    boolean isMouseOver() {
+    boolean mouseOver() {
         if (_onScreen == true) {
             _onScreen = false;
-            return mouseX >= _posX && mouseX <= _posX + _width && mouseY >= _posY && mouseY <= _posY + height;
+            return mouseX >= _posX && mouseX <= _posX + _width && mouseY >= _posY && mouseY <= _posY + _height;
         } else {
             return false;
         }
