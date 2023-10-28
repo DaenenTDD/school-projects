@@ -55,7 +55,8 @@ void mousePressed() {
 
 void checkerBoard() {
     noStroke();
-    background(255);
+    background(0);
+    fill(255);
     for (int i = 0; i < gridPasses; i++) {
         for (int k = 0; k < gridPasses; k++) {
             rect(i * 100, k * 100, 50, 50);
