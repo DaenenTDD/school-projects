@@ -1,5 +1,5 @@
 int gridPasses = 5, currentShowcase = -1;
-Button showcaseOne, showcaseTwo, backButton;
+Button showcaseOne, showcaseTwo, showcaseThree, backButton;
 
 void setup() {
     frameRate(-1);
@@ -8,9 +8,11 @@ void setup() {
     backButton = new Button(200, 430, 100, 50);
     showcaseOne = new Button(100, 300, 100, 50);
     showcaseTwo = new Button(200, 300, 100, 50);
+    showcaseThree = new Button(300, 295, 100, 60);
     backButton.setText("Back");
     showcaseOne.setText("Checker Board");
     showcaseTwo.setText("Lines");
+    showcaseThree.setText("Number\nPyramid\n(Console)");
 }
 
 void draw() {
@@ -23,6 +25,7 @@ void draw() {
             fill(0);
             showcaseOne.drawButton();
             showcaseTwo.drawButton();
+            showcaseThree.drawButton();
         break;
         case 0:
             checkerBoard();
@@ -41,6 +44,9 @@ void mousePressed() {
     }
     if (showcaseTwo.mouseOver()) {
         currentShowcase = 1;
+    }
+    if (showcaseThree.mouseOver()) {
+        numberPyramid();
     }
     if (backButton.mouseOver()) {
         currentShowcase = -1;
@@ -71,6 +77,24 @@ void lines() {
             }
         }
     }
+}
+
+void numberPyramid() {
+    int timesToPrint = 6, spacesToPrint;
+    spacesToPrint = timesToPrint - 2;
+
+    for (int i = 1; i < timesToPrint; i++) {
+        for (int a = 0; a < spacesToPrint; a++) {
+            print(" ");
+        }
+        for (int k = 0; k < i; k++) {
+            print(i);
+            print(" ");
+        }
+    print("\n");
+    spacesToPrint--;
+}
+
 }
 
 class Button {
