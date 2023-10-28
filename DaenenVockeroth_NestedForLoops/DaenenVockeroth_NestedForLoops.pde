@@ -1,10 +1,20 @@
+/**
+    DaenenVockeroth_NestedForLoops v1.0.0
+    This project consists of three showcases, a checkered grid, a sequence of lines forming a grid, and a pyramid of numbers.
+    These are all scallable (except for the pyramid, only scallable up to 9 right now) and are achived using for loops inside of other for loops.
+*/
+
+// Default vars
 int gridPasses = 5, currentShowcase = -1;
+// Setup button references
 Button showcaseOne, showcaseTwo, showcaseThree, backButton;
 
 void setup() {
+    // Basic setup
     frameRate(-1);
     size(500, 500);
     fill(255);
+    // Buttons
     backButton = new Button(200, 430, 100, 50);
     showcaseOne = new Button(100, 300, 100, 50);
     showcaseTwo = new Button(200, 300, 100, 50);
@@ -16,6 +26,7 @@ void setup() {
 }
 
 void draw() {
+    // Check what showcase should be displayed and display it
     switch (currentShowcase) {
         case -1:
             background(20);
@@ -38,6 +49,7 @@ void draw() {
     }
 }
 
+// Button click handler
 void mousePressed() {
     if (showcaseOne.mouseOver()) {
         currentShowcase = 0;
@@ -53,6 +65,7 @@ void mousePressed() {
     }
 }
 
+// The checkerboard
 void checkerBoard() {
     noStroke();
     background(0);
@@ -65,21 +78,19 @@ void checkerBoard() {
     }
 }
 
+// Lines
 void lines() {
     stroke(255);
     background(20);
     for(int i = 0; i < gridPasses * 5; i++) {
-        float y = i % 2;
         for (int k = 0; k < gridPasses * 5; k++) {
-            float x = k % 2;
-            if (x == 0 && y == 0) {
-                line(i * 50, k * 50, i * 50 + 200, k * 50);
-                line(i * 50, k * 50, i * 50, k * 50 + 200);
-            }
+            line(i * 50, k * 50, i * 50 + 200, k * 50);
+            line(i * 50, k * 50, i * 50, k * 50 + 200);
         }
     }
 }
 
+// Number pyramid (up to 9 before things get silly)
 void numberPyramid() {
     int timesToPrint = 6, spacesToPrint;
     spacesToPrint = timesToPrint - 2;
@@ -97,6 +108,7 @@ void numberPyramid() {
     }
 }
 
+// Button class to create buttons easily
 class Button {
     private float _posX, _posY, _width, _height;
     private String _buttonText = "Button";
@@ -108,11 +120,12 @@ class Button {
         _width = width;
         _height = height;
     }
-
+    // Used to set the text in the button
     void setText(String text) {
         _buttonText = text;
     }
 
+    // Drawing and updating the button on hover
     public void drawButton() {
         stroke(0);
         fill(170);
@@ -127,6 +140,7 @@ class Button {
         _onScreen = true;
     }
 
+    // Checking if the mouse is over it, and if it should be clickable (if it is not on screen, it will not be clickable)
     boolean mouseOver() {
         if (_onScreen == true) {
             _onScreen = false;
