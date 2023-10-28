@@ -2,6 +2,7 @@ int gridPasses = 5, currentShowcase = -1;
 Button showcaseOne, showcaseTwo, backButton;
 
 void setup() {
+    frameRate(-1);
     size(500, 500);
     fill(255);
     backButton = new Button(200, 430, 100, 50);
@@ -75,7 +76,7 @@ void lines() {
 class Button {
     private float _posX, _posY, _width, _height;
     private String _buttonText = "Button";
-    boolean _onScreen;
+    private boolean _onScreen;
 
     Button(float posX, float posY, float width, float height) {
         _posX = posX;
