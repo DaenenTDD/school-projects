@@ -92,10 +92,9 @@ void numberPyramid() {
             print(i);
             print(" ");
         }
-    print("\n");
-    spacesToPrint--;
-}
-
+        print("\n");
+        spacesToPrint--;
+    }
 }
 
 class Button {
