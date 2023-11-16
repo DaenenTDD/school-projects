@@ -3,7 +3,9 @@ int currentShowcase = -1;
 boolean shown = false;
 
 void setup() {
-    showcaseOne = new Button(250, 250, 75, 35);
+    frameRate(-1);
+    showcaseOne = new Button(215, 250, 75, 35);
+    showcaseOne.setText("Numbers");
     backButton = new Button(225, 450, 50, 35);
     backButton.setText("Back");
     size(500, 500);
