@@ -1,11 +1,24 @@
-Button showcaseOne, backButton;
+Button showcaseOne, showcaseTwo, backButton;
 int currentShowcase = -1;
-boolean shown = false;
+String[] images = {
+    "https://cdn.discordapp.com/attachments/1081858406459117650/1175137868772036668/image.png?ex=656a236c&is=6557ae6c&hm=ad423c60a4303ab7742039d030141b01bf7a57904feda0953c733a22fc4debf9&",
+    "https://cdn.discordapp.com/attachments/1081858406459117650/1175137896777396264/image.png?ex=656a2373&is=6557ae73&hm=d7c6ba1adc3c163d9162a9e823a26423f260b4f585c29ba588922246a6bf5585&",
+    "https://cdn.discordapp.com/attachments/1081858406459117650/1175137927349678140/image.png?ex=656a237a&is=6557ae7a&hm=f5f6da3e3c01f87abdba71b122b678b32877274d2a50fe2f9f48e0a0de4b192d&",
+    "https://cdn.discordapp.com/attachments/1081858406459117650/1175137963949170698/image.png?ex=656a2383&is=6557ae83&hm=6145bca76c3fb74d74f61f6c0740c4220cae98cf9fa0de52abf091418210d033&",
+    "https://cdn.discordapp.com/attachments/1081858406459117650/1175137981657530448/image.png?ex=656a2387&is=6557ae87&hm=ae9c51edaa836ab2ce4e2132854149739f4fdfb14f24d988d880fe93512d1625&",
+    "https://cdn.discordapp.com/attachments/1081858406459117650/1175138009075695716/image.png?ex=656a238e&is=6557ae8e&hm=d7f9c77af814ba843b4e360c62e2c93bbca93c6815c27f2d6b6757aee330c336&",
+    "https://cdn.discordapp.com/attachments/1081858406459117650/1175138035675967579/image.png?ex=656a2394&is=6557ae94&hm=edaf2920f90141b686a50defcbc61f0aa01dde2552a1eb4bb042ba43fff3cfb4&",
+    "https://cdn.discordapp.com/attachments/1081858406459117650/1175138071113637908/image.png?ex=656a239d&is=6557ae9d&hm=69d04eefc353883248fc690481d0c3ee9673b5833a13cd8848b73aa9694cebd7&"
+};
+int currentTime, lastUpdate = currentTime, imageIndex = 0;
+PImage currentImage = loadImage(images[0]);
 
 void setup() {
     frameRate(-1);
     showcaseOne = new Button(215, 250, 75, 35);
     showcaseOne.setText("Numbers");
+    showcaseTwo = new Button(215, 295, 75, 35);
+    showcaseTwo.setText("Animation");
     backButton = new Button(225, 450, 50, 35);
     backButton.setText("Back");
     size(500, 500);
@@ -15,11 +28,17 @@ void draw() {
     switch (currentShowcase) {
         case -1:
             showcaseOne.drawButton();
+            showcaseTwo.drawButton();
         break;
         case 0:
             backButton.drawButton();
         break;
+        case 1:
+            animation(100);
+            backButton.drawButton();
+        break;
     }
+    currentTime = millis();
 }
 
 void mousePressed() {
@@ -28,10 +47,30 @@ void mousePressed() {
         numbers();
     }
 
+    if (showcaseTwo.mouseOver()) {
+        currentShowcase = 1;
+    }
+
     if (backButton.mouseOver()) {
         background(200);
         currentShowcase = -1;
     }
+}
+
+void animation(int cooldown) {
+    background(200);
+    
+    if (currentTime - lastUpdate >= cooldown) {
+        imageIndex++;
+        lastUpdate = currentTime;
+        currentImage = loadImage(images[imageIndex]);
+    }
+
+    if (imageIndex == images.length - 1) {
+        imageIndex = 0;
+    }
+
+    image(currentImage, 0, 0);
 }
 
 void numbers() {
