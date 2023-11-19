@@ -11,7 +11,7 @@ String[] images = {
     "https://cdn.discordapp.com/attachments/1081858406459117650/1175138071113637908/image.png?ex=656a239d&is=6557ae9d&hm=69d04eefc353883248fc690481d0c3ee9673b5833a13cd8848b73aa9694cebd7&"
 };
 int currentTime, lastUpdate = currentTime, imageIndex = 0;
-PImage currentImage = loadImage(images[0]);
+PImage currentImage;
 
 void setup() {
     frameRate(-1);
@@ -70,7 +70,11 @@ void animation(int cooldown) {
         imageIndex = 0;
     }
 
-    image(currentImage, 0, 0);
+    try {
+        image(currentImage, 0, 0);
+    } catch (NullPointerException e) {
+        text("Could not fetch the image. Check your internet connection and try again.", 250, 230);
+    }
 }
 
 void numbers() {
