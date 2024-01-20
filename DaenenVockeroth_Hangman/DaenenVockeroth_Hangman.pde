@@ -3,18 +3,24 @@ int hangmanStage;
 boolean gameStarted;
 Button start;
 char guess;
+String wordToGuess = "";
 
 void setup() {
     monospace = createFont("cour.ttf", 20);
     frameRate(-1);
     size(750, 900);
     start = new Button(330, 500, 75, 50);
+    start.setText("Play!");
 }
 
 void draw() {
     background(130);
     if (!gameStarted) {
         start.drawButton();
+        textAlign(CENTER, CENTER);
+        textSize(30);
+        text("Type the word to guess", width / 2, 200);
+        text(wordToGuess, width / 2, 300);
         return;
     }
     line(0, 450, 750, 450);
@@ -22,13 +28,16 @@ void draw() {
 }
 
 void keyPressed() {
-    if (!gameStarted) return;
+    if (key == BACKSPACE) wordToGuess = "";
+    if (!isLetter(key)) return;
 
-    if (int(key) > 64 && int(key) < 91) guess = char(key + 32);
-    if (key > 96 && key < 123) guess = key;
+    if (!gameStarted) {
+        wordToGuess = wordToGuess + key;
+        println(wordToGuess);
+    }
 }
 
-// Loop through and display each letter using the ASCII value.
+// Loop through and display each letter in the most complicated manner I could think of
 void printChars() {
     textFont(monospace, 40);
     for (int i = 65; i < 91; i++) {
@@ -39,6 +48,15 @@ void printChars() {
 void mousePressed() {
     if (start.mouseOver()) {
         gameStarted = true;
+    }
+}
+
+// Identifies the supplied char and determines if it is a letter or not
+boolean isLetter(char input) {
+    if (int(key) > 64 && int(key) < 91 || int(key) > 96 && int(key) < 123) {
+        return true;
+    } else {
+        return false;
     }
 }
 
