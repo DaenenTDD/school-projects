@@ -26,30 +26,35 @@ void draw() {
 }
 
 void keyPressed() {
+    int keyASCII = int(key);
+    if (keyASCII > 96) {
+        keyASCII -= 32;
+    }
     if (!gameStarted) {
         background(130);
         if (key == BACKSPACE) wordToGuess = "";
-        if (!isLetter(key)) return;
-        wordToGuess = wordToGuess + key;
+        if (!isLetter(char(keyASCII))) return;
+        wordToGuess = wordToGuess + char(keyASCII);
     } else {
-        if (!isLetter(key)) return;
+        if (!isLetter(char(keyASCII))) return;
         
         for (int i = 0; i < wordToGuess.length(); i++) {
-            if (!wordToGuess.contains(str(key)) && !wrongLetters.contains(str(key))) {
+            if (!wordToGuess.contains(str(char(keyASCII))) && !wrongLetters.contains(str(char(keyASCII)))) {
                 fill(0);
                 rectMode(CENTER);
-                rect(int(key) * 23 - 1400, 650, 20, 50);
+                rect(keyASCII * 23 - 1400, 650, 20, 50);
                 hangmanStage++;
                 drawHangman(hangmanStage);
-                wrongLetters = wrongLetters + key;
+                wrongLetters = wrongLetters + keyASCII;
                 return;
             }
-            if (key == wordToGuess.charAt(i)) {
+            if (char(keyASCII) == wordToGuess.charAt(i)) {
                 fill(0);
                 rectMode(CENTER);
-                rect(int(key) * 23 - 1400, 650, 20, 50);
-                text(wordToGuess.charAt(i), 50, 50);
-                println(wrongLetters);
+                rect(keyASCII * 23 - 1400, 650, 20, 50);
+                int amount = wordToGuess.length();
+                float leftShift = textWidth('_') / 2 * amount;
+                text(wordToGuess.charAt(i), i * 30 + 370 - leftShift, 400);
             }
         }
     }
