@@ -3,7 +3,7 @@ int hangmanStage = 0;
 boolean gameStarted;
 Button start;
 char guess;
-String wordToGuess = "";
+String wordToGuess = "", wrongLetters = "";
 
 void setup() {
     monospace = createFont("cour.ttf", 20);
@@ -14,30 +14,44 @@ void setup() {
 }
 
 void draw() {
-    background(130);
-    println(mouseX, mouseY);
     if (!gameStarted) {
         start.drawButton();
         textAlign(CENTER, CENTER);
         textSize(30);
         text("Type the word to guess", width / 2, 200);
-        text("The word must be longer than 2 letters", width / 2, 50);
+        text("The word must be longer than 3 letters, max of 12", width / 2, 50);
         text(wordToGuess, width / 2, 300);
         return;
     }
-    line(0, 450, 750, 450);
-    drawHangman(hangmanStage);
-    printCharSpaces(wordToGuess);
-    printChars();
 }
 
 void keyPressed() {
-    if (key == BACKSPACE) wordToGuess = "";
-    if (!isLetter(key)) return;
-
     if (!gameStarted) {
+        background(130);
+        if (key == BACKSPACE) wordToGuess = "";
+        if (!isLetter(key)) return;
         wordToGuess = wordToGuess + key;
-        println(wordToGuess);
+    } else {
+        if (!isLetter(key)) return;
+        
+        for (int i = 0; i < wordToGuess.length(); i++) {
+            if (!wordToGuess.contains(str(key)) && !wrongLetters.contains(str(key))) {
+                fill(0);
+                rectMode(CENTER);
+                rect(int(key) * 23 - 1400, 650, 20, 50);
+                hangmanStage++;
+                drawHangman(hangmanStage);
+                wrongLetters = wrongLetters + key;
+                return;
+            }
+            if (key == wordToGuess.charAt(i)) {
+                fill(0);
+                rectMode(CENTER);
+                rect(int(key) * 23 - 1400, 650, 20, 50);
+                text(wordToGuess.charAt(i), 50, 50);
+                println(wrongLetters);
+            }
+        }
     }
 }
 
@@ -52,6 +66,7 @@ void printChars() {
 
 void printCharSpaces(String string) {
     fill(0);
+    textFont(monospace, 40);
     int amount = string.length();
     float leftShift = textWidth('_') / 2 * amount;
     for (int i = 1; i < amount + 1; i++) {
@@ -61,8 +76,13 @@ void printCharSpaces(String string) {
 
 void mousePressed() {
     if (start.mouseOver()) {
-        if (wordToGuess.length() < 3) return;
-        gameStarted = true;
+        if (wordToGuess.length() > 3 && wordToGuess.length() < 13) {
+            background(130);
+            gameStarted = true;
+            line(0, 450, 750, 450);
+            printCharSpaces(wordToGuess);
+            printChars();
+        }
     }
 }
 
