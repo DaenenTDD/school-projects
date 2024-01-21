@@ -15,15 +15,18 @@ void setup() {
 
 void draw() {
     background(130);
+    println(mouseX, mouseY);
     if (!gameStarted) {
         start.drawButton();
         textAlign(CENTER, CENTER);
         textSize(30);
         text("Type the word to guess", width / 2, 200);
+        text("The word must be longer than 2 letters", width / 2, 50);
         text(wordToGuess, width / 2, 300);
         return;
     }
     line(0, 450, 750, 450);
+    printCharSpaces(wordToGuess);
     printChars();
 }
 
@@ -45,8 +48,17 @@ void printChars() {
     }
 }
 
+void printCharSpaces(String string) {
+    int amount = string.length();
+    float leftShift = textWidth('_') / 2 * amount;
+    for (int i = 1; i < amount + 1; i++) {
+        text("_", i * 30 + 340 - leftShift, 400);
+    } 
+}
+
 void mousePressed() {
     if (start.mouseOver()) {
+        if (wordToGuess.length() < 3) return;
         gameStarted = true;
     }
 }
