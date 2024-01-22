@@ -3,9 +3,10 @@ int hangmanStage = 0;
 boolean gameStarted;
 Button start;
 char guess;
-String wordToGuess = "", wrongLetters = "", correctLetters = "";
+String wordToGuess = "", wrongLetters = "", correctLetters = "", usedLetters = "";
 
 void setup() {
+    background(130);
     monospace = createFont("cour.ttf", 20);
     frameRate(-1);
     size(750, 900);
@@ -69,7 +70,7 @@ void keyPressed() {
                 wrongLetters = wrongLetters + char(keyASCII);
                 return;
             }
-            if (char(keyASCII) == wordToGuess.charAt(i)) {
+            if (char(keyASCII) == wordToGuess.charAt(i) && !usedLetters.contains(str(char(keyASCII)))) {
                 correctLetters = correctLetters + wordToGuess.charAt(i);
                 fill(0, 255, 0);
                 rectMode(CENTER);
@@ -81,6 +82,7 @@ void keyPressed() {
                 text(wordToGuess.charAt(i), i * 30 + 370 - leftShift, 400);
             }
         }
+        usedLetters = usedLetters + char(keyASCII);
     }
 }
 
