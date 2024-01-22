@@ -2,7 +2,6 @@ PFont monospace;
 int hangmanStage = 0;
 boolean gameStarted;
 Button start;
-char guess;
 String wordToGuess = "", wrongLetters = "", correctLetters = "", usedLetters = "";
 
 void setup() {
