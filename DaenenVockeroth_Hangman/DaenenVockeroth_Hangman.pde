@@ -3,7 +3,7 @@ int hangmanStage = 0;
 boolean gameStarted;
 Button start;
 char guess;
-String wordToGuess = "", wrongLetters = "";
+String wordToGuess = "", wrongLetters = "", correctLetters = "";
 
 void setup() {
     monospace = createFont("cour.ttf", 20);
@@ -23,6 +23,24 @@ void draw() {
         text(wordToGuess, width / 2, 300);
         return;
     }
+
+    if (hangmanStage >= 11) {
+        fill(0);
+        rectMode(CORNER);
+        rect(20, 350, 710, 500);
+        fill(255);
+        text("YOU LOSE, THE WORD WAS: \n" + wordToGuess, 390, 570);
+        noLoop();
+    }
+
+    if (hangmanStage < 11 && correctLetters.length() == wordToGuess.length()) {
+        fill(0);
+        rectMode(CORNER);
+        rect(20, 50, 710, 300);
+        fill(0, 255, 40);
+        text("YOU WIN!!", 370, 200);
+        noLoop();
+    }
 }
 
 void keyPressed() {
@@ -40,18 +58,24 @@ void keyPressed() {
         
         for (int i = 0; i < wordToGuess.length(); i++) {
             if (!wordToGuess.contains(str(char(keyASCII))) && !wrongLetters.contains(str(char(keyASCII)))) {
-                fill(0);
+                fill(255, 0, 0);
                 rectMode(CENTER);
                 rect(keyASCII * 23 - 1400, 650, 20, 50);
+                fill(0);
+                printChars();
                 hangmanStage++;
+                println(hangmanStage);
                 drawHangman(hangmanStage);
-                wrongLetters = wrongLetters + keyASCII;
+                wrongLetters = wrongLetters + char(keyASCII);
                 return;
             }
             if (char(keyASCII) == wordToGuess.charAt(i)) {
-                fill(0);
+                correctLetters = correctLetters + wordToGuess.charAt(i);
+                fill(0, 255, 0);
                 rectMode(CENTER);
                 rect(keyASCII * 23 - 1400, 650, 20, 50);
+                fill(0);
+                printChars();
                 int amount = wordToGuess.length();
                 float leftShift = textWidth('_') / 2 * amount;
                 text(wordToGuess.charAt(i), i * 30 + 370 - leftShift, 400);
@@ -126,6 +150,7 @@ void drawHangman(int stage) {
             line(200, 285, 235, 320);
             line(200, 50, 350, 50);
             line(350, 50, 350, 100);
+        break;
         case 6:
             line(200, 320, 500, 320);
             line(200, 320, 200, 50);
@@ -155,6 +180,7 @@ void drawHangman(int stage) {
             ellipse(350, 100, 50, 50);
             line(350, 125, 350, 200);
             line(350, 200, 335, 250);
+        break;
         case 9:
             line(200, 320, 500, 320);
             line(200, 320, 200, 50);
